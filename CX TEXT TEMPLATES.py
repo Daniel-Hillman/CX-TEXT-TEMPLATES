@@ -92,41 +92,65 @@ tom_categories = {
     ),
 }
 
-# Set up the main window
+def convert_to_polly():
+    polly_categories = {}
+    for key, value in tom_categories.items():
+        polly_categories[key.replace("Tom", "Polly")] = value.replace("TOM", "POLLY").replace("Tom", "Polly")
+    return polly_categories
+
+# Generate POLLY categories
+polly_categories = convert_to_polly()
+
+# Set up the main application window
 root = tk.Tk()
 root.title("CX Message Template Selector")
-root.geometry("600x400")  # Set window size (you can adjust this)
-
-
+root.geometry("650x400")  # Set window size
 
 # Styling: Background and Font
 root.config(bg="#FAFAFA")  # Light grey-white background
-font_style = ("Arial", 12)  
+font_style = ("Arial", 12)
 
-
-# Function to copy the message to clipboard
-def copy_message():
-    selected_template = template_var.get()
+# Function to copy the TOM message to clipboard
+def copy_tom_message():
+    selected_template = tom_template_var.get()
     message = tom_categories.get(selected_template, "No message selected")
-    # Copy message to clipboard
     root.clipboard_clear()
     root.clipboard_append(message)
     root.update()
 
-   
+# Function to copy the POLLY message to clipboard
+def copy_polly_message():
+    selected_template = polly_template_var.get()
+    message = polly_categories.get(selected_template, "No message selected")
+    root.clipboard_clear()
+    root.clipboard_append(message)
+    root.update()
 
-# Create a dropdown list of template categories
-template_var = tk.StringVar()
-template_var.set(list(tom_categories.keys())[0])  # Set default value
+# Create dropdown list for TOM templates
+tom_template_var = tk.StringVar()
+tom_template_var.set(list(tom_categories.keys())[0])  # Set default value
 
-template_menu = tk.OptionMenu(root, template_var, *tom_categories.keys())
-template_menu.config(width=30, font=font_style)
-template_menu.pack(pady=20)
+tom_template_menu = tk.OptionMenu(root, tom_template_var, *tom_categories.keys())
+tom_template_menu.config(font=font_style)
+tk.Label(root, text="Select a TOM template:", bg="#FAFAFA", font=font_style).pack(pady=5)
+tom_template_menu.pack(pady=5)
 
+# Create dropdown list for POLLY templates
+polly_template_var = tk.StringVar()
+polly_template_var.set(list(polly_categories.keys())[0])  # Set default value
 
-# Create the "Copy Message" button
-copy_button = tk.Button(root, text="Copy Message", command=copy_message, font=font_style)
-copy_button.pack(pady=20)
+polly_template_menu = tk.OptionMenu(root, polly_template_var, *polly_categories.keys())
+polly_template_menu.config(font=font_style)
+tk.Label(root, text="Select a POLLY template:", bg="#FAFAFA", font=font_style).pack(pady=5)
+polly_template_menu.pack(pady=5)
 
-# Run the Tkinter event loop
+# Create buttons to copy TOM and POLLY messages
+tom_button = tk.Button(root, text="Copy TOM Message", command=copy_tom_message, bg="#4CAF50", fg="white", font=font_style)
+polly_button = tk.Button(root, text="Copy POLLY Message", command=copy_polly_message, bg="#2196F3", fg="white", font=font_style)
+
+# Add buttons to the window
+tom_button.pack(pady=10)
+polly_button.pack(pady=10)
+
+# Start the Tkinter event loop
 root.mainloop()
