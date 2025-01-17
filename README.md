@@ -1,2 +1,3 @@
-# CX-TEXT-TEMPLATES
-This is a project for sttoring different messages that we use at the office on the daily. I am trying to have it so that we don't have to copy and paste anymore while double clocking and selecting text etc. It takes much too long. 
+CX-TEXT-TEMPLATES Project
+
+This project is designed to store and manage frequently used office messages efficiently. The goal is to eliminate the need for manual copying, pasting, and selecting text, which consumes too much time during daily tasks. By implementing a centralized, user-friendly system, we can significantly improve workflow speed and accuracy.
